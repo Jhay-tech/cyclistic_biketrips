@@ -15,4 +15,13 @@ In 2016, **Cyclistic** launched a successful bike-share oﬀering. Since then, t
 > 4. **Cyclistic executive team:** The notoriously detail-oriented executive team will decide whether to approve the recommended marketing program.
 
 ### ASK
+Problem Explanation
+Moreno has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. There are 3 questions that will guide the future marketing program:
+1. How do annual members and casual riders use Cyclistic bikes differently? <br>
+2. Why would casual riders buy Cyclistic annual memberships? <br>
+3. How can Cyclistic use digital media to influence casual riders to become members? <br>
+
+For this project, the director of marketing assigned me to answer the first question (How do annual members and casual riders use **Cyclistic bikes** differently?).
+
+**Business Task:** Analyse fictional company **(Cyclistic)** trip data to spot differences in how annual members and casual riders use **Cyclistic** bikes differently.
 
