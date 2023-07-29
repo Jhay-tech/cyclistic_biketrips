@@ -45,7 +45,7 @@ After making these updates for all the 12 files, I saved each .XLS file as a new
 Since the datasets are large, I decided to continue my cleaning or manipulation process with R programming. <br>
 The **R** code related to this step can be accessed here
 
-Continue my data cleaning and manipulation in **R** 
+Continue my data cleaning and manipulation in **R** <br>
 4. Changed the format of **start_datetime** and **end_datetime** columns to date and time format using **as.POSIXct() function**. <br>
 5. Created new data frame called **cleaned_biketrips** to house the new columns created which are **ride_length**, **day_of_week**, **months** and **hour**. <br>
 6. Created the 4 columns using the **mutate()** to house all; **difftime()** to created the **ride_length** column subtracting the **end_datetime** columns from **start_datetime** column, **wday()** function to calculate the day of the week that each ride started called **day_of_week** column, **month()** and **hour()** functions to calculate the month and hour that each ride started called *month* and **start_hour** respectively. <br>
