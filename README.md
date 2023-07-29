@@ -4,4 +4,7 @@ I was asked to complete this case study after the completion of my Google Data A
 
 I used Cyclistic historical trip data to determine trends or relationships, and theorise what was causing them. After then, I develop an action plan based on those findings. 
 
- 
+```{r cars}
+summary(cars)
+```
+gvdas
