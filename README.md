@@ -72,7 +72,7 @@ Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/cyclisti
 ### Share
 I visualised my findings using **R** programming 
 
-Click here to view the **R** script. 
+Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/cyclistic_data_visualisation.R) to view the **R** script. 
 
 Click here to view the image format of my visualisation.  
 
