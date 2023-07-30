@@ -99,7 +99,7 @@ favored_month_ridelength <-cleaned_biketrips %>%
   dplyr::summarise(mean_ride_length = mean(ride_length), .groups = "drop")
 favored_month_ridelength 
 
-# Fine the top 15 starting stations per number of rides for both annual members and casual riders
+# Find the top 15 starting stations per number of rides for both annual members and casual riders
 # Calculate the daily average rides for each stations first
 options(dplyr.summarise.inform = FALSE)
 avg_rides_start_station <- cleaned_biketrips %>% 
