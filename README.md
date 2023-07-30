@@ -45,7 +45,7 @@ I downloaded the previous 12 months of Cyclistic trip data from July 2020 to Jun
 After making these updates for all the 12 files, I saved each .XLS file as a new .CSV file. <br>
 
 Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. <br>
-Load data for 6 months due to **R** RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/data_wrangling_and_cleaning.R) <br>
+Load data for 6 months due to **R** RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/data_wrangling_and_cleaning.R). <br>
 
 Continue my data cleaning and manipulation in **R** [link](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/data_wrangling_and_cleaning.R)<br>
 
@@ -58,7 +58,7 @@ Continue my data cleaning and manipulation in **R** [link](https://github.com/Jh
 ### Analyse 
 Performed data aggregation and calculation, identified trends & relationships, analysed data and formatted data correctly using R programming.
 
-Click here to view the R script and the summary of complete analysis process.
+Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/cyclistic_data_analysis.R) to view the R script and the summary of complete analysis process. 
 
 **Summary of Analysis** <br> 
 1. Casual riders have greater mean and median ride lengths than annual members. <br>
