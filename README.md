@@ -61,7 +61,7 @@ Continue my data cleaning and manipulation in **R** [link](https://github.com/Jh
 ### Analyse 
 Performed data aggregation and calculation, identified trends & relationships, analysed data and formatted data correctly using R programming.
 
-Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/cyclistic_data_analysis.R) to view the R script and the summary of complete analysis process. 
+Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/cyclistic_data_analysis.R) to view the R script. 
 
 **Summary of Analysis** <br> 
 1. Casual riders have greater mean and median ride lengths than annual members. <br>
