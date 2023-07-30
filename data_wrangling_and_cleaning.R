@@ -1,4 +1,3 @@
-# Since the datasets are large, I decided to continue my cleaning or manipulation process with R programming
 # Install and load all the packages needed 
 install.packages("tidyverse")
 install.packages("withr")
@@ -24,6 +23,7 @@ biketrips_05_2021 <- read_csv("cyclistic_project/csv_files/05_2021_cyclistic_bik
 biketrips_06_2021 <- read_csv("cyclistic_project/csv_files/06_2021_cyclistic_biketrips.csv")
   
 # Combine all the data
+## rows: 1,973,410, columns: 13
 merged_biketrips <- bind_rows(biketrips_01_2021, biketrips_02_2021, biketrips_03_2021, biketrips_04_2021, biketrips_05_2021, biketrips_06_2021)
 
 # Check the column names, each datatype and view the first 10 data
@@ -60,4 +60,3 @@ cleaned_biketrips = cleaned_biketrips %>%
   filter(between(ride_length, 1, 1440))
 bad_data <- nrow(merged_biketrips) - nrow(cleaned_biketrips)
 paste0("There are a total of ", bad_data , " bad data removed ")
-   ok 
