@@ -74,7 +74,7 @@ I visualised my findings using **R** programming
 
 Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/cyclistic_data_visualisation.R) to view the **R** script. 
 
-Click here to view the image format of my visualisation.  
+Click [here](https://github.com/Jhay-tech/cyclistic_biketrips/tree/main/visualisation) to view the image format of my visualisation.  
 
 ### Act 
 After spotting the differences between casual and member riders, marketing strategies to target casual riders can be developed to persuade them to become members. 
