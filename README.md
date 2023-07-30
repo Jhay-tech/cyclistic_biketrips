@@ -47,7 +47,7 @@ After making these updates for all the 12 files, I saved each .XLS file as a new
 Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. <br>
 Load data for 6 months due to **R** RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/data_wrangling_and_cleaning.R) <br>
 
-Continue my data cleaning and manipulation in **R** <br>
+Continue my data cleaning and manipulation in **R** [link](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/data_wrangling_and_cleaning.R)<br>
 
 4. Changed the format of **start_datetime** and **end_datetime** columns to date and time format using **as.POSIXct() function**. <br>
 5. Created new data frame called **cleaned_biketrips** to house the new columns created which are **ride_length**, **day_of_week**, **months** and **hour**. <br>
