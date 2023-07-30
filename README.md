@@ -28,9 +28,12 @@ Analyse fictional company (Cyclistic) trip data to spot differences in how annua
 
 ### Prepare
 **Data Sources Description:** <br> 
-I will be using Cyclistic historical trip data [link](https://divvy-tripdata.s3.amazonaws.com/index.html). It is a public data made available by Motivate International Inc. under this [license](https://ride.divvybikes.com/data-license-agreement). It includes Cyclistic historical trip data of customers for each month. The data is organized in folders containing CSV files of the data classified by month and year. Each CSV files have 13 columns, each record represents a trip and each trip is anonymised.<br>
-I will be using data from July 2020 to June 2021. <br>
-Data-privacy issues prohibit me from using riders’ personally identiﬁable information. This means that I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes. <br>
+I will be using Cyclistic historical trip data [link](https://divvy-tripdata.s3.amazonaws.com/index.html). It is a public data made available by Motivate International Inc. under this [license](https://ride.divvybikes.com/data-license-agreement). It includes Cyclistic historical trip data of customers for each month. The data is organized in folders containing CSV files of the data classified by month and year. Each record represents a trip and each trip is anonymised.
+
+I will be using data from July 2020 to June 2021. There are 12 files with naming convention of YYYYMM-divvy-tripdata. Each CSV files have 13 columns which names are ride_id, rideable_type, started_at, ended_at, start_station_name, start_station_id, end_station_name, end_station_id, start_lat, start_lng, end_lat, end_lng and member_casual.
+
+Data-privacy issues prohibit me from using riders’ personally identiﬁable information. This means that I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes. 
+
 In terms of bias and credibility, Cyclistic is a fictional company and the data is a public data, the data is reliable, original, current because it’s updated, comprehensive because not missing essential information required for the analysis and was collected ethically. <br>
 Employed both manual and automated processes to verify data integrity.
 
