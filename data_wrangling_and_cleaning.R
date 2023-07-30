@@ -37,9 +37,6 @@ summary(merged_biketrips)
 merged_biketrips$start_datetime <- as.POSIXct(merged_biketrips$start_datetime, format = "%m/%d/%Y %H:%M")
 merged_biketrips$end_datetime <- as.POSIXct(merged_biketrips$end_datetime, format = "%m/%d/%Y %H:%M")
 
-# Check if there are any misspelled value in column customer_type
-unique(merged_biketrips$customer_type)
-
 # Create new columns; ride_length, day_of_week, hour and month
 cleaned_biketrips = merged_biketrips %>%
   mutate(
