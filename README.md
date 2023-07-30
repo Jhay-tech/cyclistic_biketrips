@@ -61,8 +61,8 @@ Performed data aggregation and calculation, identified trends & relationships, a
 Click here to view the R script and the summary of complete analysis process.
 
 **Summary of Analysis** <br> 
-1. casual riders have greater mean and median ride lengths than annual members. <br>
-2. casual riders and annual member have the same minimum ride lengths, but casual riders have more maximum ride lengths than members. <br>
+1. Casual riders have greater mean and median ride lengths than annual members. <br>
+2. Casual riders and annual member have the same minimum ride lengths, but casual riders have more maximum ride lengths than members. <br>
 3. From January 2021 to June 2021, annual members have higher rides than casual riders, but casual riders have higher total ride lengths than annual members.<br>
 4. Annual members have the most number of rides during Wednesdays and Thursdays, while casual riders have less and mostly prefer to ride bikes on Fridays, Saturdays and Sundays. Casual riders have significantly longer rides than annual members in all days of the week, with Sunday being the longest of the week.  <br>
 5. Most annual members and casual riders prefer to begin their rides between 4PM and 6PM. <br>
@@ -75,6 +75,15 @@ I visualised my findings using **R** programming
 Click here to view the **R** script. 
 
 Click here to view the image format of my visualisation.  
+
+### Act 
+After spotting the differences between casual and member riders, marketing strategies to target casual riders can be developed to persuade them to become members. 
+
+Here are my top 3 recommendations based on my findings:
+
+1. Introduce discounts to weekend rides, since casual riders prefer to ride bikes on Friday, Saturday and Sunday. Also offer discounts for peak time 4PM and 6PM. <br>
+2. Streeter Dr & Grand Ave stations are the most popular stations for casual riders, therefore there should be more focus on these stations in the aspect of special discount for long ride, coupons, complimentary trips,  and marketing campaigns. <br>
+3. Start a fun bike competition with prizes in the months of May and June for riders, since casual riders have longest rides and highest number of rides in both months. <br>
 
 
 
