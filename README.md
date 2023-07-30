@@ -31,21 +31,21 @@ Analyse fictional company (Cyclistic) trip data to spot differences in how annua
 I will be using Cyclistic historical trip data [link](https://divvy-tripdata.s3.amazonaws.com/index.html). It is a public data made available by Motivate International Inc. under this [license](https://ride.divvybikes.com/data-license-agreement). It includes Cyclistic historical trip data of customers for each month. The data is organized in folders containing CSV files of the data classified by month and year. Each CSV files have 13 columns, each record represents a trip and each trip is anonymised.<br>
 I will be using data from July 2020 to June 2021. <br>
 Data-privacy issues prohibit me from using riders’ personally identiﬁable information. This means that I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes. <br>
-In terms of bias and credibility, cyclistic is a fictional company and the data is a public data, the data is reliable, original, current because it’s updated, comprehensive because not missing essential information required for the analysis and was collected ethically. <br>
+In terms of bias and credibility, Cyclistic is a fictional company and the data is a public data, the data is reliable, original, current because it’s updated, comprehensive because not missing essential information required for the analysis and was collected ethically. <br>
 Employed both manual and automated processes to verify data integrity.
 
 ### Process 
-**Tools used:** Excel and R 
+**Tools used:** Excel and R <br>
 I downloaded the previous 12 months of Cyclistic trip data from July 2020 to June 2021. Unzip the files, created a folder on my desktop and housed the files. Created subfolders for the .CSV file and the .XLS file so I can have a copy of the original data. I launched Excel, opened each file, and chose to Save As an Excel Workbook file. For each .XLS file, I applied the following process: <br>
 
 1. Changed some column names; **rideable_type** to **ride_type**, **started_at** to **start_datetime**, **ended_at** to **end_datetime**, and **membership_casual** to **customer_type**. <br>
 2. Checked for duplicate values using **(Data < remove duplicates < for all columns)**, but no duplicate values. <br>
 3. Checked for misspelled values under **bike_type**, **end_station_name**, **start_station_name** and **customer_type** using **(Review < spelling)**, no misspelled values found.<br>
+
 After making these updates for all the 12 files, I saved each .XLS file as a new .CSV file. <br>
 
-Since the datasets are large, I decided to continue my cleaning or manipulation process with R programming. <br>
-The **R** code related to this step can be accessed here <br>
-Load data for 6 months due to R RAM space (from 01/2021 to 06/2021) <br>
+Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. <br>
+Load data for 6 months due to R RAM space (from January 2021 to June 2021).The **R** code related to this step can be accessed here <br>
 
 Continue my data cleaning and manipulation in **R** <br>
 
