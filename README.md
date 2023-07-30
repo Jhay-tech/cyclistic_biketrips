@@ -45,7 +45,7 @@ I downloaded the previous 12 months of Cyclistic trip data from July 2020 to Jun
 After making these updates for all the 12 files, I saved each .XLS file as a new .CSV file. <br>
 
 Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. <br>
-Load data for 6 months due to **R** RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed here <br>
+Load data for 6 months due to **R** RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed [here](https://github.com/Jhay-tech/cyclistic_biketrips/blob/main/data_wrangling_and_cleaning.R) <br>
 
 Continue my data cleaning and manipulation in **R** <br>
 
