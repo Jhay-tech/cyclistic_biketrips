@@ -53,6 +53,7 @@ is.numeric(cleaned_biketrips$ride_length) #returns TRUE if ride_length is numeri
 
 # Remove bad ride_length data
 # ride length must be at least 1 min but not more than 24 hours(1440 minutes)
+##There are a total of 69062 bad data removed
 cleaned_biketrips = cleaned_biketrips %>%
   filter(between(ride_length, 1, 1440))
 bad_data <- nrow(merged_biketrips) - nrow(cleaned_biketrips)
