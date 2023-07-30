@@ -45,13 +45,30 @@ I downloaded the previous 12 months of Cyclistic trip data from July 2020 to Jun
 After making these updates for all the 12 files, I saved each .XLS file as a new .CSV file. <br>
 
 Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. <br>
-Load data for 6 months due to R RAM space (from January 2021 to June 2021).The **R** code related to this step can be accessed here <br>
+Load data for 6 months due to R RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed here <br>
 
 Continue my data cleaning and manipulation in **R** <br>
 
 4. Changed the format of **start_datetime** and **end_datetime** columns to date and time format using **as.POSIXct() function**. <br>
 5. Created new data frame called **cleaned_biketrips** to house the new columns created which are **ride_length**, **day_of_week**, **months** and **hour**. <br>
-6. Created the 4 columns using the **mutate()** to house all; **difftime()** to created the **ride_length** column subtracting the **end_datetime** columns from **start_datetime** column, **wday()** function to calculate the day of the week that each ride started called **day_of_week** column, **month()** and **hour()** functions to calculate the month and hour that each ride started called *month* and **start_hour** respectively. <br>
+6. Created the 4 columns using the **mutate()** to house all; **difftime()** function to create the **ride_length** column subtracting the **end_datetime** columns from **start_datetime** column, **wday()** function to calculate the day of the week that each ride started called **day_of_week** column, **month()** and **hour()** functions to calculate the month and hour that each ride started called *month* and **start_hour** respectively. <br>
 7. Changed the **ride_length** column to numeric format. <br>
 8. Removed the bad data in column **ride_length** which are less than 1min or more than 24 hours (1440 minutes).
+
+### Analyse 
+Performed data aggregation and calculation, identified trends & relationships, analyse data and formatted data correctly using R programming.
+
+Click here to view the R script and the summary of complete analysis process.
+
+**Summary of Analysis** <br> 
+1. casual riders have greater mean and median ride lengths than annual members. <br>
+2. casual riders and annual member have the same minimum ride lengths, but casual riders have more maximum ride lengths than members. <br>
+3. From January 2021 to June 2021, annual members have higher rides than casual riders, but casual riders have higher total ride lengths than annual members.<br>
+4. Annual members have the most number of rides during Wednesdays and Thursdays, while casual riders have less and mostly prefer to ride bikes on Fridays, Saturdays and Sundays. Casual riders have significantly longer rides than annual members in all days of the week, with Sunday being the longest of the week.  <br>
+5. Most annual members and casual riders prefer to begin their rides between 4PM and 6PM. <br>
+6. The month of June has the highest number of rides for both casual and annual members. The month of May has the longest rides for casual riders while May and June both have the longest rides for annual members with the same records. <br>
+7. The top start station for annual members are Clark St & Elm St., while the top start station for casual riders are Streeter Dr & Grand Ave.
+
+
+
 
