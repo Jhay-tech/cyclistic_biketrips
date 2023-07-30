@@ -45,7 +45,7 @@ I downloaded the previous 12 months of Cyclistic trip data from July 2020 to Jun
 After making these updates for all the 12 files, I saved each .XLS file as a new .CSV file. <br>
 
 Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. <br>
-Load data for 6 months due to R RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed here <br>
+Load data for 6 months due to **R** RAM space (from January 2021 to June 2021). The **R** code related to this step can be accessed here <br>
 
 Continue my data cleaning and manipulation in **R** <br>
 
@@ -56,7 +56,7 @@ Continue my data cleaning and manipulation in **R** <br>
 8. Removed the bad data in column **ride_length** which are less than 1min or more than 24 hours (1440 minutes).
 
 ### Analyse 
-Performed data aggregation and calculation, identified trends & relationships, analyse data and formatted data correctly using R programming.
+Performed data aggregation and calculation, identified trends & relationships, analysed data and formatted data correctly using R programming.
 
 Click here to view the R script and the summary of complete analysis process.
 
@@ -68,6 +68,14 @@ Click here to view the R script and the summary of complete analysis process.
 5. Most annual members and casual riders prefer to begin their rides between 4PM and 6PM. <br>
 6. The month of June has the highest number of rides for both casual and annual members. The month of May has the longest rides for casual riders while May and June both have the longest rides for annual members with the same records. <br>
 7. The top start station for annual members are Clark St & Elm St., while the top start station for casual riders are Streeter Dr & Grand Ave.
+
+### Share
+I visualised my findings using **R** programming 
+
+Click here to view the **R** script. 
+
+Click here to view the image format of my visualisation.  
+
 
 
 
