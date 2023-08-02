@@ -1,0 +1,677 @@
+---
+title: "Case Study: How Does a Bike-Share Navigate Speedy Success"
+author: "Philip Johnson"
+date: "2023-07-30"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Table of content**
+* Introduction  
+* Ask
+* Prepare
+* Process
+* Analyse
+* Share
+* Act
+
+## **Introduction**
+This is my report for the capstone project after the completion of my 5 months Google Data Analytics Professional Certificate on Coursera.
+
+I work with a fictional bike-share company called Cyclistic. The objective is to design marketing strategies aimed at converting casual riders into annual members. I was assigned to spot differences in how annual members and casual riders use Cyclistic bikes differently.
+
+I used Cyclistic historical trip data to determine trends or relationships, analyse data, aggregate data and format data correctly. After then, I develop an action plan based on those findings.
+
+Cyclistic is a bike-share company with two categories of customers; casual riders (customers who purchase single-ride or full-day passes) and annual members (Customers who purchase annual memberships). In 2016, Cyclistic launched a successful bike-share oﬀering. Since then, the program has grown to a ﬂeet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
+
+#### **Characters and teams:**
+1. **Cyclistic:** A bike-share program that features more than 5,800 bicycles and 600 docking stations.
+2. **Lily Moreno:** The director of marketing and my manager.
+3. **Cyclistic marketing analytics team:** A team of data analysts who are responsible for collecting, analyzing, and reporting data that helps guide Cyclistic marketing strategy.
+4. **Cyclistic executive team:** The notoriously detail-oriented executive team will decide whether to approve the recommended marketing program.
+
+## **ASK**
+#### **Problem Explanation**
+Moreno has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. There are 3 questions that will guide the future marketing program:
+
+1. How do annual members and casual riders use Cyclistic bikes differently?
+2. Why would casual riders buy Cyclistic annual memberships?
+3. How can Cyclistic use digital media to influence casual riders to become members?
+
+For this project, the director of marketing assigned me to answer the first question (How do annual members and casual riders use Cyclistic bikes differently?).
+
+#### **Business Task:**
+Analyse fictional company (Cyclistic) trip data to spot differences in how annual members and casual riders use Cyclistic bikes differently.
+
+## **Prepare**
+#### **Data Sources Description:**  
+I will be using Cyclistic historical trip data [link](https://divvy-tripdata.s3.amazonaws.com/index.html). It is a public data made available by Motivate International Inc. under this [license](https://ride.divvybikes.com/data-license-agreement). It includes Cyclistic historical trip data of customers for each month. The data is organized in folders containing CSV files of the data classified by month and year. Each record represents a trip and each trip is anonymised.
+
+I will be using data from July 2020 to June 2021. There are 12 files with naming convention of YYYYMM-divvy-tripdata. Each CSV files have 13 columns which names are ride_id, rideable_type, started_at, ended_at, start_station_name, start_station_id, end_station_name, end_station_id, start_lat, start_lng, end_lat, end_lng and member_casual.
+
+Data-privacy issues prohibit me from using riders’ personally identiﬁable information. This means that I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes. 
+
+In terms of bias and credibility, Cyclistic is a fictional company and the data is a public data, the data is reliable, original, current because it’s updated, comprehensive because not missing essential information required for the analysis and was collected ethically. <br>
+Employed both manual and automated processes to verify data integrity.
+
+## **Process** 
+#### **Tools used:** Excel and R 
+I downloaded the previous 12 months of Cyclistic trip data from July 2020 to June 2021. Unzip the files, created a folder on my desktop and housed the files. Created subfolders for the .CSV file and the .XLS file so I can have a copy of the original data. I launched Excel, opened each file, and chose to Save As an Excel Workbook file. For each .XLS file, I applied the following process: 
+
+1. Changed some column names; **rideable_type** to **ride_type**, **started_at** to **start_datetime**, **ended_at** to **end_datetime**, and **membership_casual** to **customer_type**. <br>
+2. Checked for duplicate values using **(Data < remove duplicates < for all columns)**, but no duplicate values. <br>
+3. Checked for misspelled values under **bike_type**, **end_station_name**, **start_station_name** and **customer_type** using **(Review < spelling)**, no misspelled values found.<br>
+
+After making these updates for all the 12 files, I saved each .XLS file as a new .CSV file. <br>
+
+Since the datasets are large, I decided to continue my cleaning or manipulation process with **R** programming. 
+
+**Load the packages needed**
+```{r Load packages}
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(readr) 
+library(skimr)
+library(ggplot2)
+library(RColorBrewer)
+library(plyr)
+library(patchwork)
+```
+
+**Load data for 6 months due to **R** RAM space (from January 2021 to June 2021).** 
+```{r Load data}
+biketrips_01_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/01_2021_cyclistic_biketrips.csv")
+biketrips_02_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/02_2021_cyclistic_biketrips.csv")
+biketrips_03_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/03_2021_cyclistic_biketrips.csv")
+biketrips_04_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/04_2021_cyclistic_biketrips.csv")
+biketrips_05_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/05_2021_cyclistic_biketrips.csv")
+biketrips_06_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/06_2021_cyclistic_biketrips.csv")
+ 
+```
+
+**Combine all the data**
+```{r combine all the data}
+merged_biketrips <- bind_rows(biketrips_01_2021, biketrips_02_2021, biketrips_03_2021, biketrips_04_2021, biketrips_05_2021, biketrips_06_2021)
+
+```
+
+**Check the summary and structure of the data**
+```{r check data}
+str(merged_biketrips)
+summary(merged_biketrips)
+```
+
+**Reveal the column names** 
+```{r column names}
+colnames(merged_biketrips)
+```
+
+#### **Continue my data cleaning and manipulation in R**
+
+**Change the format of start_datetime and end_datetime columns to date and time format**
+```{r change format}
+merged_biketrips$start_datetime <- as.POSIXct(merged_biketrips$start_datetime, format = "%m/%d/%Y %H:%M")
+merged_biketrips$end_datetime <- as.POSIXct(merged_biketrips$end_datetime, format = "%m/%d/%Y %H:%M")
+```
+
+**Check if there are any misspelled value in column customer_type**
+```{r unique customer type}
+unique(merged_biketrips$customer_type)
+```
+
+**Create new columns; ride_length, day_of_week, hour and month**
+```{r create new columns}
+cleaned_biketrips = merged_biketrips %>%
+  mutate(
+    ride_length = difftime(end_datetime, start_datetime, units = "mins"),
+    day_of_week = wday(start_datetime, label = T, abbr = F),
+    hour_start = hour(start_datetime),
+    month = month(start_datetime, label = T, abbr = F),
+      )
+```
+
+**Change ride_length to numeric format**
+```{r change ride length format to numeric}
+cleaned_biketrips$ride_length <-
+  as.numeric(as.character(cleaned_biketrips$ride_length))
+is.numeric(cleaned_biketrips$ride_length) #returns TRUE if ride_length is numeric already
+```
+
+**Remove bad ride_length data** <br>
+**Ride length must be at least 1 min but not more than 24 hours(1440 minutes)**
+```{r remove bad ride_length}
+cleaned_biketrips = cleaned_biketrips %>%
+  filter(between(ride_length, 1, 1440))
+bad_data <- nrow(merged_biketrips) - nrow(cleaned_biketrips)
+paste0("There are a total of ", bad_data , " bad data removed ")
+```
+
+**Check the cleaned data**
+```{r checked cleaned data}
+glimpse(cleaned_biketrips)
+```
+
+#### **Continue my Data Cleaning and Manipulation Documentation**
+4. Changed the format of **start_datetime** and **end_datetime** columns to date and time format using **as.POSIXct() function**. <br>
+5. Created new data frame called **cleaned_biketrips** to house the new columns created which are **ride_length**, **day_of_week**, **months** and **hour**. <br>
+6. Created the 4 columns using the **mutate()** to house all; **difftime()** function to create the **ride_length** column subtracting the **end_datetime** columns from **start_datetime** column, **wday()** function to calculate the day of the week that each ride started called **day_of_week** column, **month()** and **hour()** functions to calculate the month and hour that each ride started called *month* and **start_hour** respectively. <br>
+7. Changed the **ride_length** column to numeric format. <br>
+8. Removed the bad data in column **ride_length** which are less than 1min or more than 24 hours (1440 minutes).
+
+## Analyse
+Performed data aggregation and calculation, identified trends & relationships, analysed data and formatted data correctly using **R** programming.
+
+**Check the max value in ride_length**
+```{r check the maximum value in ride_length}
+max(cleaned_biketrips$ride_length)
+```
+
+**Check the min value in ride_length**
+```{r check the minimum value in ride_length}
+min(cleaned_biketrips$ride_length)
+```
+
+**Find the overall mean of ride_length among annual members and casual riders.**
+```{r Find the overall mean of ride_length among annual members and casual riders}
+mean_ridelength_member <-
+  mean(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "member"], na.rm = TRUE)
+mean_ridelength_casual <-
+  mean(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "casual"], na.rm = TRUE)
+
+paste0("Members mean ride length is ", mean_ridelength_member)
+```
+
+```{r view mean}
+paste0("Casual mean ride length is ", mean_ridelength_casual)
+```
+
+**Find the overall median of ride_length of annual members and casual riders.**
+```{r median}
+median_ride_length_member <- 
+  median(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "member"], na.rm = TRUE)
+median_ride_length_casual <-
+  median(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "casual"], na.rm = TRUE)
+
+paste0("Members median ride length is ", median_ride_length_member)
+```
+
+```{r median view}
+paste0("Casual median ride length is ", median_ride_length_casual)
+```
+
+
+**Find the minimum and maximum ride length for both members and casual riders.**
+```{r min and max ride_length}
+min(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "member"])
+min(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "casual"])
+
+max(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "member"])
+max(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "casual"])
+```
+
+**Find the total number of rides among members and casual riders.**
+```{r Find the total number of rides among members and casual riders }
+total_rides_customer <- cleaned_biketrips %>% 
+  group_by(customer_type) %>% 
+  dplyr::summarise(rides_number = n())
+total_rides_customer
+```
+
+**Find the total ride_length between members and casual riders**
+```{r total ride length}
+total_ride_length_member <-
+  sum(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "member"], 
+      na.rm = TRUE)
+total_ride_length_casual <-
+  sum(cleaned_biketrips$ride_length[cleaned_biketrips$customer_type == "casual"], 
+      na.rm = TRUE) 
+
+paste0("The combined distance traveled by annual members is ", 
+       total_ride_length_member)
+```
+
+```{r result}
+paste0("The combined distance traveled by casual riders is ", 
+       total_ride_length_casual)
+```
+
+**Find the most popular day of the week between annual members and casual riders.**
+```{r most popular day of the week}
+favored_day <- cleaned_biketrips %>% 
+  group_by(customer_type, day_of_week) %>% 
+  dplyr::summarise(rides_number = n(), .groups = "drop")
+favored_day
+```
+
+```{r most popular day of the week per ride_length}
+favored_day_ridelength <- cleaned_biketrips %>%
+  group_by(customer_type, day_of_week) %>%
+  dplyr::summarise(mean_ridelength = mean(ride_length), .groups = "drop")
+favored_day_ridelength
+```
+
+**Find the most popular starting hour between annual members and casual riders.**
+```{r MS start hour}
+favored_starthour <- cleaned_biketrips %>% 
+  group_by(customer_type, hour_start) %>% 
+  dplyr::summarise(rides_number = n(), .groups = "drop")
+favored_starthour
+```
+
+**Find the most popular month between annual members and casual riders.**
+```{r MS month}
+favored_month <- cleaned_biketrips %>% 
+  group_by(customer_type, month) %>% 
+  dplyr::summarise(rides_length = n(), .groups = "drop")
+favored_month
+```
+
+```{r MP month avg}
+favored_month_ridelength <-cleaned_biketrips %>%
+  group_by(customer_type, month) %>%
+  dplyr::summarise(mean_ride_length = mean(ride_length), .groups = "drop")
+favored_month_ridelength 
+```
+
+**Fine the top 15 starting stations per number of rides for both annual members and casual riders**
+```{r top 15 starting stations}
+# Calculate the daily average rides for each stations first
+options(dplyr.summarise.inform = FALSE)
+avg_rides_start_station <- cleaned_biketrips %>% 
+  filter(start_station_name != " ") %>% 
+  group_by(start_station_name, customer_type) %>% 
+  dplyr::summarise(rides_number = n())
+avg_rides_start_station <- avg_rides_start_station[!avg_rides_start_station$start_station_name == "",]
+
+#Then find the top 15 for both members and casual riders 
+top_15_stations <- 
+  rbind(
+    avg_rides_start_station %>% filter(customer_type == "member") %>% arrange(desc(rides_number)) %>% head(15),
+    avg_rides_start_station %>% filter(customer_type == "casual") %>% arrange(desc(rides_number)) %>% head(15),
+  )
+
+top_15_stations
+```
+
+#### **Summary of Analysis**  
+1. Casual riders have greater mean and median ride lengths than annual members. <br>
+2. Casual riders and annual member have the same minimum ride lengths, but casual riders have more maximum ride lengths than members. <br>
+3. From January 2021 to June 2021, annual members have higher rides than casual riders, but casual riders have higher total ride lengths than annual members.<br>
+4. Annual members have the most number of rides during Wednesdays and Thursdays, while casual riders have less and mostly prefer to ride bikes on Fridays, Saturdays and Sundays. Casual riders have significantly longer rides than annual members in all days of the week, with Sunday being the longest of the week.  <br>
+5. Most annual members and casual riders prefer to begin their rides between 4PM and 6PM. <br>
+6. The month of June has the highest number of rides for both casual and annual members. The month of May has the longest rides for casual riders while May and June both have the longest rides for annual members with the same records. <br>
+7. The top start station for annual members are Clark St & Elm St., while the top start station for casual riders are Streeter Dr & Grand Ave.
+
+## **Share**
+I visualised my findings using **R** programming 
+
+#### Data Vasualisation 
+
+```{r vis 1}
+data_vis_1 <-
+  cleaned_biketrips %>%
+  group_by(customer_type) %>%
+  dplyr::summarise(mean_ridelength = mean(ride_length),.groups = "drop") %>%
+  ggplot(aes(x = customer_type,
+             y = mean_ridelength,
+             fill = customer_type)) +
+  geom_bar(width = 0.4, position = position_dodge(width = 0.6), stat = "identity") +
+  #geom_text(aes(label = x_ridelength), position = position_dodge (width=1),vjust = -0.5, size =3.5, colour = "black")+
+  scale_fill_manual(values = c("#e03424", "#3970dd")) +
+  scale_y_continuous(n.breaks = 8) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders\n Total Mean Ride Lengths (in Mins)"
+    ),
+    captions =
+      "Source: Motivate International Inc.\n Lyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2023",
+    x = "Customer Type",
+    y = "Mean Length of Rides (in Mins)"
+  ) + labs(fill = 'Customer Type')+ 
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +  theme(panel.grid.major.x = element_blank(),
+             panel.grid.minor.x = element_blank())
+
+data_vis_1
+```
+
+```{r vis 2}
+data_vis_2 <-
+  cleaned_biketrips %>%
+  group_by(customer_type) %>%
+  dplyr::summarise(median_ride_length = median(ride_length),.groups = "drop") %>%
+  ggplot(aes(x = customer_type,
+             y = median_ride_length,
+             fill = customer_type)) +
+  geom_bar(width = 0.4, position = position_dodge(width = 0.6), stat = "identity") +
+  #geom_text(aes(label = x_ridelength), position = position_dodge (width=1),vjust = -0.5, size =3.5, colour = "black")+
+  scale_fill_manual(values = c("#e03424", "#3970dd")) +
+  scale_y_continuous(n.breaks = 8) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders\n Total Median Ride Lengths (in mins)"
+    ),
+    captions =
+      "Maximun and Minimum Length of Ride:\nMaximum: 1439 mins || Minimum: 1 min\n
+       Source: Motivate International Inc.\n Lyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2021",
+    x = "Customer Type",
+    y = "Median Length of Rides (in Mins)"
+  ) + labs(fill = 'Customer Type')+ 
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +  theme(panel.grid.major.x = element_blank(),
+             panel.grid.minor.x = element_blank())
+
+data_vis_2
+```
+
+```{r vis 3}
+data_vis_3 <- cleaned_biketrips %>%
+  group_by(customer_type) %>%
+  dplyr::summarise(rides_number = n(), .groups = "drop") %>%
+  ggplot(aes(x = customer_type, y = rides_number, fill = customer_type)) +
+  geom_col(width = 0.3, position = position_dodge(width = 0.6)) +
+  scale_fill_manual(values = c("#e03424", "#3970dd")) +
+  scale_y_continuous(n.breaks = 15) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders",
+      sep = "\n",
+      "Total Rides Number"
+    ),
+    caption = paste(
+      "Source: Motivate International Inc.",
+      sep = "\n",
+      "Lyft Bikes and Scooters, LLC (“Bikeshare”)"
+    ),
+    subtitle = "From January 2021-June 2021",
+    x = "Customer Type",
+    y = "Rides Number" 
+  ) + labs(fill = 'Customer Type')+ 
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
+
+data_vis_3
+```
+
+```{r vis 4}
+data_vis_4 <- cleaned_biketrips %>%
+  group_by(customer_type, hour_start) %>%
+  dplyr::summarise(rides_number = n(), .groups = "drop") %>%
+  ggplot(aes(x = hour_start, y = rides_number, col = customer_type)) + geom_point (alpha = 0.5, size = 2) +
+  scale_colour_manual(name = "Customer Type",
+                      values = c("casual" = "#e03424", "member" = "#3970dd")) +
+  scale_y_continuous(n.breaks = 12) +
+  scale_x_continuous(n.breaks = 24) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders",
+      sep = "\n",
+      "Total Number of Rides in Start Hours of Rides of the Day"
+    ),
+    caption = paste(
+      "Source: Motivate International Inc.",
+      sep = "\n",
+      "Lyft Bikes and Scooters, LLC (“Bikeshare”)"
+    ),
+    subtitle = "From January 2021-June 2021",
+    x = "Ride Hours in 24-Hour Format",
+    y = "Number of Rides"
+  ) +
+  geom_smooth() +
+  theme_light() + theme(panel.grid.major.x = element_blank(),
+                        panel.grid.minor.x = element_blank())
+
+data_vis_4
+```
+
+```{r vis 5}
+data_vis_5 <- cleaned_biketrips %>%
+  group_by(customer_type, hour_start, day_of_week) %>%
+  dplyr::summarise(rides_number = n(), .groups = "drop") %>%
+  ggplot(aes(x = hour_start, y = rides_number, col = customer_type)) + geom_point (size = 1) +
+  scale_colour_manual(name = "Customer Types",
+                      values = c("casual" = "#e03424", "member" = "#3970dd")) +
+  scale_y_continuous(n.breaks = 4) +
+  scale_x_continuous(n.breaks = 7) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders",
+      sep = "\n",
+      "Total Number of Rides divided by Days of the Week and\nStart Hours of Rides of the Day"
+    ),
+    caption = paste(
+      "Source: Motivate International Inc.",
+      sep = "\n",
+      "Lyft Bikes and Scooters, LLC (“Bikeshare”)"
+    ),
+    subtitle = "From January 2021-June 2021",
+    x = "Ride Hours in 24-Hour Format",
+    y = "Rides Number"
+  ) + facet_wrap(.~day_of_week) +
+  geom_smooth() + theme_light()+ theme(panel.grid.major.x = element_blank(),
+                                       panel.grid.minor.x = element_blank()) + 
+  theme(strip.background = element_rect(fill = c("#81f70a"))) +
+  theme(strip.text = element_text(colour = 'black', face = "bold"))
+
+data_vis_5
+
+```
+
+```{r vis 6}
+data_vis_6 <- cleaned_biketrips %>%
+  group_by(customer_type, day_of_week) %>%
+  dplyr::summarise(rides_number = n(), .groups = "drop") %>%
+  ggplot(aes(x = day_of_week,
+             y = rides_number,
+             fill = customer_type)) +
+  geom_bar(width = 0.7, position = position_dodge(width = 0.9), stat = "identity") + coord_flip() +
+  scale_fill_manual(values = c("#e03424", "#3970dd")) +
+  scale_y_continuous(n.breaks = 10) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders\n Total Number of Rides per Days of the Week"
+    ),
+    captions =
+      "Source: Motivate International Inc.\nLyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2021",
+    x = "Days of the Week",
+    y = "Rides Number"
+  ) +  labs(fill = 'Customer Types')+ 
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ), 
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +  theme(panel.grid.major.x = element_blank(),
+             panel.grid.minor.x = element_blank()) +
+  theme(strip.background = element_rect(fill = c("#81f70a"))) +
+  theme(strip.text = element_text(colour = 'black', face = "bold"))
+
+data_vis_6
+```
+
+```{r vis 7}
+data_vis_7 <- cleaned_biketrips %>%
+  group_by(customer_type, day_of_week) %>%
+  dplyr::summarise(mean_ride_length = mean(ride_length), .groups = "drop") %>%
+  ggplot(aes(x = day_of_week,
+             y = mean_ride_length,
+             fill = customer_type)) +
+  geom_bar(width = 0.7, position = position_dodge(width = 0.9), stat = "identity") + coord_flip() +
+  scale_fill_manual(values = c("#e03424", "#3970dd")) +
+  scale_y_continuous(n.breaks = 11) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders\n Average Length of Rides (in Mins) per Days of the Week"
+    ),
+    captions =
+      "Source: Motivate International Inc.\nLyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2021",
+    x = "Days of the Week",
+    y = "Length of Rides (in Mins)"
+  ) +  labs(fill = 'Customer Type')+ 
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +  theme(panel.grid.major.x = element_blank(),
+             panel.grid.minor.x = element_blank()) +
+  theme(strip.background = element_rect(fill = c("#81f70a"))) +
+  theme(strip.text = element_text(colour = 'black', face = "bold"))
+
+data_vis_7
+```
+
+```{r vis 8}
+data_vis_8 <- cleaned_biketrips %>%
+  group_by(customer_type, month) %>%
+  dplyr::summarise(rides_number = n(), .groups = "drop") %>%
+  ggplot(aes(x = month,
+             y = rides_number,
+             fill = customer_type)) +
+  geom_bar(width = 0.7, position = position_dodge(width = 0.9), stat = "identity") + coord_flip() +
+  scale_fill_manual(values = c("#e03424", "#3970dd")) +
+  scale_y_continuous(n.breaks = 10) +
+  labs(
+    title = paste(
+      "Annual Members vs. Casual Riders\n Total Rides Number by Month"
+    ),
+    captions =
+      "Source: Motivate International Inc.\nLyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2021",
+    x = "Month",
+    y = "Rides Number"
+  ) +  labs(fill = 'Customer Type')+ 
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +  theme(panel.grid.major.x = element_blank(),
+             panel.grid.minor.x = element_blank()) +
+  theme(strip.background = element_rect(fill = c("#81f70a"))) +
+  theme(strip.text = element_text(colour = 'black', face = "bold"))
+
+data_vis_8
+```
+
+```{r vis 9}
+data_vis_9 <- top_15_stations %>%
+  filter(customer_type == "member") %>%
+  ggplot() +
+  geom_bar(aes(x = reorder(start_station_name, rides_number), y = rides_number, 
+               fill = customer_type), stat = "identity", width = 0.7) + coord_flip() +
+  scale_y_continuous(n.breaks = 7) +
+  scale_fill_manual(values = "#3970dd") +
+  labs(
+    title = paste(" Top 15 Most Popular Start Stations for Annual Members"),
+    captions =
+      "Source: Motivate International Inc.\nLyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2021",
+    x = "Starting Stations",
+    y = "Rides Number"
+  ) +  labs(fill = 'Customer Type') +
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) + theme_light() +
+  theme(
+    panel.grid.major.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+data_vis_9
+```
+
+```{r vis 10}
+data_vis_10 <- top_15_stations %>%
+  filter(customer_type == "casual") %>%
+  ggplot() +
+  geom_bar(aes(x = reorder(start_station_name, rides_number), y = rides_number, 
+               fill = customer_type), stat = "identity", width = 0.7) + coord_flip() +
+  scale_y_continuous(n.breaks = 7) +
+  scale_fill_manual(values = "#e03424") +
+  labs(
+    title = paste(" Top 15 Most Popular Start Stations for Casual Riders"),
+    captions =
+      "Source: Motivate International Inc.\nLyft Bikes and Scooters, LLC (“Bikeshare”)",
+    subtitle = "From January 2021-June 2021",
+    x = "Starting Stations",
+    y = "Rides Number"
+  ) +  labs(fill = 'Customer Type') +
+  theme_light() + theme(
+    plot.title = element_text(
+      color = "black",
+      size = 13,
+      face = "bold",
+      hjust = 0.5
+    ),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) + theme_light() +
+  theme(
+    panel.grid.major.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+
+data_vis_10
+```
+
+## **Act** 
+After spotting the differences between casual and member riders, marketing strategies to target casual riders can be developed to persuade them to become members. 
+
+Here are my top 3 recommendations based on my findings:
+
+1. Introduce discounts to weekend rides, since casual riders prefer to ride bikes on Friday, Saturday and Sunday. Also offer discounts for peak time 4PM and 6PM. <br>
+2. Streeter Dr & Grand Ave stations are the most popular stations for casual riders, therefore there should be more focus on these stations in the aspect of special discount for long ride, coupons, complimentary trips,  and marketing campaigns. <br>
+3. Start a fun bike competition with prizes in the months of May and June for riders, since casual riders have longest rides and highest number of rides in both months. <br>
+
+
+
+
+
+
+
+
