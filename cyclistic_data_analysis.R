@@ -88,12 +88,12 @@ favored_starthour <- cleaned_biketrips %>%
   dplyr::summarise(rides_number = n(), .groups = "drop")
 favored_starthour
 
-# Find the most popular starting hour between annual members and casual riders
+# Find the most popular month between annual members and casual riders
 favored_month <- cleaned_biketrips %>% 
   group_by(customer_type, month) %>% 
   dplyr::summarise(rides_length = n(), .groups = "drop")
 favored_month
-
+   
 favored_month_ridelength <-cleaned_biketrips %>%
   group_by(customer_type, month) %>%
   dplyr::summarise(mean_ride_length = mean(ride_length), .groups = "drop")
