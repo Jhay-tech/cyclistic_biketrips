@@ -93,7 +93,7 @@ favored_month <- cleaned_biketrips %>%
   group_by(customer_type, month) %>% 
   dplyr::summarise(rides_length = n(), .groups = "drop")
 favored_month
-  
+   
 favored_month_ridelength <-cleaned_biketrips %>%
   group_by(customer_type, month) %>%
   dplyr::summarise(mean_ride_length = mean(ride_length), .groups = "drop")
