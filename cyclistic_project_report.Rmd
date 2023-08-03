@@ -74,6 +74,7 @@ Since the datasets are large, I decided to continue my cleaning or manipulation 
 
 **Load the packages needed**
 ```{r Load packages}
+library(plyr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
@@ -81,11 +82,10 @@ library(readr)
 library(skimr)
 library(ggplot2)
 library(RColorBrewer)
-library(plyr)
 library(patchwork)
 ```
 
-**Load data for 6 months due to **R** RAM space (from January 2021 to June 2021).** 
+Load data for 6 months due to **R** RAM space (from January 2021 to June 2021).
 ```{r Load data}
 biketrips_01_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/01_2021_cyclistic_biketrips.csv")
 biketrips_02_2021 <- read_csv("C:/Users/HP/Documents/cyclistic_project/csv_files/02_2021_cyclistic_biketrips.csv")
