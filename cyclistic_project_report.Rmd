@@ -3,8 +3,8 @@ title: "Case Study: How Does a Bike-Share Navigate Speedy Success"
 author: "Philip Johnson"
 date: "2023-07-30"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -61,6 +61,7 @@ Employed both manual and automated processes to verify data integrity.
 
 ## **Process** 
 #### **Tools used:** Excel and R 
+
 I downloaded the previous 12 months of Cyclistic trip data from July 2020 to June 2021. Unzip the files, created a folder on my desktop and housed the files. Created subfolders for the .CSV file and the .XLS file so I can have a copy of the original data. I launched Excel, opened each file, and chose to Save As an Excel Workbook file. For each .XLS file, I applied the following process: 
 
 1. Changed some column names; **rideable_type** to **ride_type**, **started_at** to **start_datetime**, **ended_at** to **end_datetime**, and **membership_casual** to **customer_type**. <br>
